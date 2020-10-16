@@ -52,12 +52,12 @@ List* get_adj_nodes(Node* n){
     List* list = createList(); //Se crea la lista que contiene a los nodos
     for(int i = 0; i<9 ; i++){
       for(int j = 0; j<9 ; j++){
-        if(n->sudo [i][j] == 0){
+        if(n->sudo [i][j] == 0){ //Si la casilla está vacia se ven los posibles valores
           for(int num = 1; num<= 9 ; num++){
             n->sudo[i][j] = num;
             if(is_valid(n)){
               Node * nuevo = copy(n);
-              pushBack(list, nuevo);
+              pushBack(list, nuevo); //Si el nodo es valido se ingresa a la lista
             }
           }
           n->sudo[i][j] = 0;
