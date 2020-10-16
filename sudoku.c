@@ -43,10 +43,8 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n){
-
-    return 1;
+  return 0;
 }
-
 
 List* get_adj_nodes(Node* n){
     List* list = createList(); //Se crea la lista que contiene a los nodos
@@ -72,32 +70,33 @@ List* get_adj_nodes(Node* n){
 int is_final(Node* n){
     for(int i = 0; i < 9; i++){
       for(int j = 0; j < 9; j++){
-        if(n->sudo[i][j] == 0){
+        if(n->sudo[i][j] == 0){ //Si la casilla tiene un 0 la matriz aun no se completa
           return 0;
         }
       }
     }
-    return 1;
+    return 1; //Si no se encuentra un 0 la matriz esta completa
 }
 
 Node* DFS(Node* initial, int* cont){
-    Stack * S = createStack();
-    push(S, initial);
-    while(is_empty(S) != 1){
+    Stack * S = createStack(); //Se crea el stack
+    push(S, initial); //Se ingresa el nodo inicial al stack
+    while(is_empty(S) != 1){ //Mientras el stack no este vacio
       Node * node = top(S);
-      pop(S);
+      pop(S); //Se elimina el primer nodo
       if(is_final(node) == 1){
-        return node;
+        return node; //Si es un nodo final se retorna el nodo
       }
       List * lista = createList();
       Node* nod = first(lista);
-      lista = get_adj_nodes(node);
+      lista = get_adj_nodes(node); //Se obtienen los nodos adyacentes a el nodo
       while(nod != NULL){
-        push(S,nod);
+        push(S,nod); //Se van agregando los nodos adyacentes al stack
         nod = next(lista);
+        cont++;
       }
       free(node);
-      free(nod);
+      free(nod); //Se libera la memoria del nodo
       }
     return NULL;
 }
